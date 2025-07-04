@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="p-3">
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-6 mx-auto mb-3">
+                <h2>Hayvonot bog‘imiz haqida</h2>
+                <hr />
+                <p>
+WildWorld Zoo’da biz hayvonot olamining mo‘jizalarini sizga yaqinlashtiramiz — bu ta’lim, tabiatni asrash va unutilmas sarguzashtning noyob uyg‘unligidir.
+Hayvonot bog‘imiz dunyoning har bir burchagidan kelgan turli xil yovvoyi hayvonlarga makon bo‘lib xizmat qiladi — Afrika savannalari va Osiyo o‘rmonlaridan tortib, Arktika tundrasi hamda Amazon yomg‘ir o‘rmonlarigacha.
+Siz bu yerda sherning qudratli g‘irillashini eshitishingiz, ekzotik qushlarning nafis parvozini ko‘rishingiz yoki maymunlarning o‘ynoqi harakatlaridan zavqlanishingiz mumkin — har bir tashrif buyuruvchi uchun hayratlanarli jihatlar bor.
+
+Biz hayvonlarimiz uchun xavfsiz va tabiiy muhit yaratishga sodiqmiz, shu bilan birga mehmonlarimizga ham qiziqarli va ma’lumotlarga boy tajriba taqdim etamiz. Har bir volyer hayvonlarning tabiiy yashash joylariga mos tarzda loyihalashtirilgan bo‘lib, ularning sog‘ligi va farovonligini ta’minlaydi, hamda tashrif buyuruvchilarga tabiatni asrashning naqadar muhimligini tushunishga yordam beradi.
+                </p>
+                <p>
+Interaktiv ko‘rgazmalar, yo‘l-yo‘riqli ekskursiyalar, jonli ovqatlantirish namoyishlari va ta’lim dasturlari bilan WildWorld Zoo – bu shunchaki hayvonlarni ko‘rish joyi emas, balki tabiat bilan bog‘lanish maskanidir.
+Oilangiz bilan tashrif buyurayotgan bo‘lsangiz ham, do‘stlaringiz bilan sayr qilayotgan bo‘lsangiz yoki maktab guruhingiz bilan o‘rganayotgan bo‘lsangiz, bizning hayvonot bog‘imiz sizga hayajon, kashfiyot va ilhom bilan to‘la bir kunni taqdim etadi.
+
+WildWorld Zoo’da sayr qiling, o‘rganing va ilhom oling — bu yerda yovvoyi tabiat mo‘jiza bilan uchrashadi.
+                </p>
+            </div>
+            <div class="col-md-6 mx-auto mb-3 text-center">
+                <img src="{% static 'img/about.jpg' %}"
+                     class="max-width-100"
+                     alt="about" />
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

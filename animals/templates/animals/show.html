@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="p-3">
+    <div class="container">
+        <div class="row mt-3">
+            <div class="col-md-6 mx-auto mb-3">
+                <h2>{{ template_data.animal.name }}</h2>
+                <hr />
+                <p><b>Ta'rif:</b> {{ template_data.animal.description }}</p>
+                <p><b>Og'irligi:</b> {{ template_data.animal.mass }} kg</p>
+                <p><b>Hayvonlar soni:</b> {{ template_data.animal.number_of_animals }}</p>
+
+                <h2>Reviews</h2>
+                <hr />
+                <ul class="list-group">
+                    {% for review in template_data.reviews %}
+                        <li class="list-group-item pb-3 pt-3">
+                            <h5 class="card-title">Review by {{ review.user.username }}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ review.date }}</h6>
+                            <p class="card-text">{{ review.comment }}</p>
+                            {% if user.is_authenticated and user == review.user %}
+                            <a class="btn btn-primary" href="{% url 'animals.edit_review' id=template_data.animal.id review_id=review.id %}">Edit</a>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+
+                {% if user.is_authenticated %}
+                <div class="container mt-4">
+                    <div class="row justify-content-center">
+                        <div class="col-12">
+                            <div class="card shadow p-3 mb-4 rounded">
+                                <div class="card-body">
+                                    <b class="text-start">Fikr yozish</b><br /><br />
+                                    <form method="POST" action="{% url 'animals.create_review' id=template_data.animal.id %}">
+                                        {% csrf_token %}
+                                        <p>
+                                            <label for="comment">Comment:</label>
+                                            <textarea name="comment" required class="form-control" id="comment"></textarea>
+                                        </p>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn bg-dark text-white">Fikr qo'shish</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6 mx-auto mb-3 text-center">
+                <img src="{{ template_data.animal.image.url }}" class="rounded img-card-300" />
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

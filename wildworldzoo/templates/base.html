@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WildWorld Zoo - Home</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+          rel="stylesheet" 
+          crossorigin="anonymous">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;700&display=swap" 
+          rel="stylesheet">
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+            crossorigin="anonymous">
+    </script>
+
+    <style>
+        /* Custom CSS Styles */
+        :root {
+            --primary-color: #2d5a27;
+            --secondary-color: #6ab43e;
+            --accent-color: #ffa500;
+            --dark-bg: #1a1a1a;
+            --light-text: #f8f9fa;
+            --muted-text: #6c757d;
+            --gradient-primary: linear-gradient(135deg, #2d5a27 0%, #6ab43e 100%);
+            --gradient-secondary: linear-gradient(135deg, #ffa500 0%, #ff6b35 100%);
+            --shadow-soft: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 8px 40px rgba(0, 0, 0, 0.2);
+            --navbar-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+            padding-top: var(--navbar-height);
+        }
+
+        /* Remove padding for login and other form pages */
+        body.no-hero {
+            padding-top: var(--navbar-height);
+        }
+
+        body.no-hero #login,
+        body.no-hero .main-content {
+            margin-top: 0;
+            padding-top: 0;
+        }
+
+        /* Position login form directly under navbar */
+        #login {
+            margin-top: 0;
+            padding-top: 1rem;
+        }
+
+        /* Header Styles */
+        .navbar-custom {
+            background: linear-gradient(135deg, rgba(46, 46, 46, 0.95) 0%, rgba(45, 90, 39, 0.95) 100%);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            height: var(--navbar-height);
+        }
+
+        .navbar-custom.scrolled {
+            background: var(--dark-bg);
+            padding: 0.5rem 0;
+            height: 60px;
+        }
+
+        .navbar-brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--light-text) !important;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .navbar-brand:hover {
+            color: var(--secondary-color) !important;
+            transform: scale(1.05);
+            transition: all 0.3s ease;
+        }
+
+        .navbar-nav {
+            align-items: center;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--light-text) !important;
+            font-weight: 500;
+            margin: 0 0.5rem;
+            padding: 0.5rem 1rem !important;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .navbar-nav .nav-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .navbar-nav .nav-link:hover::before {
+            left: 0;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: white !important;
+            transform: translateY(-2px);
+        }
+
+        .navbar-nav .nav-link.active {
+            background: var(--gradient-primary);
+            color: white !important;
+        }
+
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, 
+                rgba(26, 26, 26, 0.7) 0%, 
+                rgba(45, 90, 39, 0.7) 50%, 
+                rgba(106, 180, 62, 0.7) 100%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><defs><pattern id="wildlife" patternUnits="userSpaceOnUse" width="100" height="100"><rect width="100" height="100" fill="%23228B22"/><circle cx="25" cy="25" r="3" fill="%23FFA500" opacity="0.3"/><circle cx="75" cy="75" r="2" fill="%23FF6347" opacity="0.3"/></pattern></defs><rect width="1200" height="800" fill="url(%23wildlife)"/></svg>');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-cta {
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .btn-primary-custom {
+            background: var(--gradient-secondary);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-strong);
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .btn-outline-light {
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-outline-light:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* Section Spacing */
+        .section-padding {
+            padding: 5rem 0;
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s ease;
+            border: none;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-primary);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+
+        .feature-card:hover::before {
+            left: 0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            color: white;
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            color: var(--accent-color);
+            transform: scale(1.1);
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .feature-card:hover .feature-title {
+            color: white;
+        }
+
+        /* Action Buttons */
+        .action-button {
+            background: var(--gradient-secondary);
+            border: none;
+            padding: 0.8rem 2rem;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 25px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-strong);
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background: var(--dark-bg);
+            color: var(--light-text);
+            padding: 3rem 0 1rem;
+        }
+
+        .footer-section {
+            margin-bottom: 2rem;
+        }
+
+        .footer-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+        }
+
+        .footer-text {
+            color: var(--muted-text);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            color: var(--muted-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-link:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+
+        .footer-bottom {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 1rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-bottom-text {
+            color: var(--muted-text);
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .navbar-custom {
+                height: 70px;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .feature-card {
+                margin-bottom: 2rem;
+            }
+            
+            .navbar-nav .nav-link {
+                margin: 0.2rem 0;
+            }
+        }
+
+        /* Utility Classes */
+        .img-card-200 {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .img-card-300 {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        /* Smooth Scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--secondary-color);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<nav class="navbar navbar-expand-lg navbar-custom fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'home.index' %}">
+            <i class="fas fa-paw me-2"></i>
+            WildWorld Zoo
+        </a>
+        <button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarNav"
+                aria-controls="navbarNav"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="{% url 'home.index' %}">
+                    <i class="fas fa-home me-1"></i>Bosh sahifa
+                </a>
+                <a class="nav-link" href="#about">
+                    <i class="fas fa-info-circle me-1"></i>Haqida
+                </a>
+                <a class="nav-link" href="#animals">
+                    <i class="fas fa-dragon me-1"></i>Hayvonlar
+                </a>
+                <a class="nav-link" href="#contact">
+                    <i class="fas fa-envelope me-1"></i>Aloqa
+                </a>
+
+                <div class="vr bg-white mx-2 d-none d-lg-block"></div>
+
+                {% if user.is_authenticated %}
+                    <a class="nav-link" href="{% url 'accounts.logout' %}">
+                        <i class="fas fa-sign-out-alt me-1"></i>Logout ({{ user.username }})
+                    </a>
+                {% else %}
+                    <a class="nav-link" href="{% url 'accounts.login' %}">
+                        <i class="fas fa-user me-1"></i>Login
+                    </a>
+                    <a class="nav-link" href="{% url 'accounts.signup' %}">
+                        <i class="fas fa-user-plus me-1"></i>Sign Up
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+{% if show_hero %}
+<section id="home" class="hero-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="hero-content">
+                    <h1 class="hero-title">WildWorld Zoo</h1>
+                    <p class="hero-subtitle">
+                        Dunyo bo'ylab ajoyib hayvonlarni kashf eting va unutilmas sarguzashtda 
+                        yovvoyi tabiatni asrash haqida ko'proq bilib oling
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#animals" class="btn-primary-custom me-3">
+                            <i class="fas fa-eye me-2"></i>Hayvonlarni ko'rish
+                        </a>
+                        <a href="#about" class="btn-outline-light">
+                            <i class="fas fa-info-circle me-2"></i>Batafsil ma'lumot
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+{% if show_hero %}
+<!-- Features Section -->
+<section id="features" class="features-section">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-4" style="color: var(--primary-color);">
+                    Bizning imkoniyatlarimiz
+                </h2>
+                <p class="lead text-muted">
+                    WildWorld Zoo'da ajoyib tajribalar va ta'lim imkoniyatlarini kashf eting
+                </p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-globe-americas"></i>
+                    </div>
+                    <h4 class="feature-title">Dunyo hayvonlari</h4>
+                    <p class="text-muted">
+                        Barcha qit'alardan 500 dan ortiq hayvon turlari bilan tanishing
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h4 class="feature-title">Hayvonlar nazorati</h4>
+                    <p class="text-muted">
+                        Hayvonlarning nazorati va ularning sog'lig'ini ta'minlash
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4 class="feature-title">Tabiatni asrash</h4>
+                    <p class="text-muted">
+                        Yo'qolib ketish xavfi ostidagi turlarni asrash va muhofaza qilish
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="about" class="section-padding">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h2 class="display-5 fw-bold mb-4" style="color: var(--primary-color);">
+                    Bizning haqimizda
+                </h2>
+                <p class="lead mb-4">
+                    WildWorld Zoo - O'zbekistondagi eng katta va zamonaviy hayvonot bog'i. 
+                    Bizning maqsadimiz yovvoyi tabiatni asrash va kelajak avlodlarga 
+                    tabiat haqida bilim berish.
+                </p>
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="text-center">
+                            <h3 class="fw-bold" style="color: var(--secondary-color);">500+</h3>
+                            <p class="text-muted">Hayvon turlari</p>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="text-center">
+                            <h3 class="fw-bold" style="color: var(--secondary-color);">15+</h3>
+                            <p class="text-muted">Yillik tajriba</p>
+                        </div>
+                    </div>
+                </div>
+                <a href="#contact" class="action-button mt-3">
+                    <i class="fas fa-info-circle me-2"></i>Ko'proq ma'lumot
+                </a>
+            </div>
+            <div class="col-lg-6">
+                <div class="position-relative">
+                    <div style="width: 100%; height: 400px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.2rem; box-shadow: var(--shadow-strong); overflow: hidden;">
+                        <img src="/static/img/zoo_haqida.jpg" alt="Zoo haqida rasm" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Animals Section -->
+<section id="animals" class="section-padding" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-4" style="color: var(--primary-color);">
+                    Bizning hayvonlarimiz
+                </h2>
+                <p class="lead text-muted">
+                    Dunyoning turli burchaklaridan kelgan ajoyib hayvonlar bilan tanishing
+                </p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-paw fa-3x" style="color: var(--secondary-color);"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Yirtqich hayvonlar</h5>
+                        <p class="card-text text-muted">
+                            Sherlar, yo'lbarslar va boshqa yirtqich hayvonlar bilan tanishing
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-dove fa-3x" style="color: var(--secondary-color);"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Qushlar</h5>
+                        <p class="card-text text-muted">
+                            Rangbarang qushlar va ularning ajoyib qo'shiqlari
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card border-0 shadow-sm h-100">
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-fish fa-3x" style="color: var(--secondary-color);"></i>
+                        </div>
+                        <h5 class="card-title fw-bold">Suv hayvonlari</h5>
+                        <p class="card-text text-muted">
+                            Dengiz va daryo hayvonlari bilan suvosti dunyosini kashf eting
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mt-5">
+            <!-- <a href="#contact" class="action-button"> -->
+            <a href="{% url 'animals.index' %}" class="action-button">
+                <i class="fas fa-eye me-2"></i>Barcha hayvonlarni ko'rish
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="section-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="display-5 fw-bold mb-4" style="color: var(--primary-color);">
+                    Biz bilan bog'laning
+                </h2>
+                <p class="lead text-muted mb-5">
+                    Savollaringiz bo'lsa yoki tashrif buyurmoqchi bo'lsangiz, biz bilan bog'laning
+                </p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-map-marker-alt fa-3x" style="color: var(--secondary-color);"></i>
+                    </div>
+                    <h5 class="fw-bold">Manzil</h5>
+                    <p class="text-muted">Toshkent, O'zbekiston</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-phone fa-3x" style="color: var(--secondary-color);"></i>
+                    </div>
+                    <h5 class="fw-bold">Telefon</h5>
+                    <p class="text-muted">+998 90 123-45-67</p>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="text-center">
+                    <div class="mb-3">
+                        <i class="fas fa-envelope fa-3x" style="color: var(--secondary-color);"></i>
+                    </div>
+                    <h5 class="fw-bold">Email</h5>
+                    <p class="text-muted">info@wildworldzoo.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+
+<!-- Content -->
+<div>
+    {% block content %}
+    {% endblock content %}
+</div>
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6">
+                <div class="footer-section">
+                    <h5 class="footer-title">
+                        <i class="fas fa-paw me-2"></i>WildWorld Zoo
+                    </h5>
+                    <p class="footer-text">
+                        WildWorld Zoo ga xush kelibsiz — dunyo bo'ylab ajoyib hayvonlarni kashf eting va 
+                        unutilmas sarguzashtda yovvoyi tabiatni asrash haqida ko'proq bilib oling.
+                    </p>
+                    <div class="social-links">
+                        <a href="#" class="footer-link d-inline-block me-3">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="footer-link d-inline-block me-3">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="footer-link d-inline-block me-3">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="footer-link d-inline-block">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6">
+                <div class="footer-section">
+                    <h5 class="footer-title">Havolalar</h5>
+                    <a href="{% url 'home.about' %}" class="footer-link">
+                        <i class="fas fa-chevron-right me-2"></i>Haqida
+                    </a>
+                    <a href="{% url 'animals.index' %}" class="footer-link">
+                        <i class="fas fa-chevron-right me-2"></i>Hayvonlar
+                    </a>
+                    <a href="#contact" class="footer-link">
+                        <i class="fas fa-chevron-right me-2"></i>Aloqa
+                    </a>
+                    <a href="#" class="footer-link">
+                        <i class="fas fa-chevron-right me-2"></i>Yangiliklar
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-section">
+                    <h5 class="footer-title">Ish vaqti</h5>
+                    <p class="footer-text">
+                        <i class="fas fa-clock me-2"></i>Dushanba - Yakshanba<br>
+                        <strong>09:00 - 18:00</strong>
+                    </p>
+                    <p class="footer-text">
+                        <i class="fas fa-ticket-alt me-2"></i>Chipta narxi<br>
+                        <strong>Kattalar: 25,000 so'm</strong><br>
+                        <strong>Bolalar: 15,000 so'm</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="footer-section">
+                    <h5 class="footer-title">Aloqa</h5>
+                    <p class="footer-text">
+                        <i class="fas fa-map-marker-alt me-2"></i>
+                        Buxoro, O'zbekiston
+                    </p>
+                    <p class="footer-text">
+                        <i class="fas fa-envelope me-2"></i>
+                        info@worldzoo.uz
+                    </p>
+                    <p class="footer-text">
+                        <i class="fas fa-phone me-2"></i>
+                        +998 90 123-45-67
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <div class="footer-bottom-text">
+                        © 2025 WildWorld Zoo. Barcha huquqlar himoyalangan.
+                    </div>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <div class="footer-bottom-text">
+                        DESIGNED BY
+                        <a href="#" target="_blank">Zoo Team</a> &amp;
+                        <a href="#" target="_blank">Zoo Staff</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.querySelector('.navbar-custom');
+        if (navbar) {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        }
+    });
+
+    // Get navbar height for offset calculation
+    function getNavbarHeight() {
+        const navbar = document.querySelector('.navbar-custom');
+        return navbar ? navbar.offsetHeight : 80;
+    }
+
+    // Handle anchor links with proper offset
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const target = document.querySelector(targetId);
+            
+            if (target) {
+                const navbarHeight = getNavbarHeight();
+                const targetPosition = target.offsetTop - navbarHeight - 20; // Extra 20px padding
+                
+                // Check if it's a main navigation link
+                const isMainNavLink = this.closest('.navbar-nav');
+                
+                if (isMainNavLink) {
+                    // Instant jump for main navigation
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'auto'
+                    });
+                } else {
+                    // Smooth scrolling for other links
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+    // Handle URL hash on page load (for direct links)
+    function handleHashOnLoad() {
+        if (window.location.hash) {
+            setTimeout(function() {
+                const target = document.querySelector(window.location.hash);
+                if (target) {
+                    const navbarHeight = getNavbarHeight();
+                    const targetPosition = target.offsetTop - navbarHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 100); // Small delay to ensure page is fully loaded
+        }
+    }
+
+    // Call hash handler on page load
+    handleHashOnLoad();
+
+    // Animation on scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Apply animations to various elements
+    const animatedElements = [
+        '.feature-card',
+        '.card',
+        '.animal-card',
+        '.stats-card'
+    ];
+
+    animatedElements.forEach(selector => {
+        document.querySelectorAll(selector).forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(element);
+        });
+    });
+
+    // Handle Bootstrap navbar collapse on mobile
+    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+        link.addEventListener('click', function() {
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                const bsCollapse = new bootstrap.Collapse(navbarCollapse, {
+                    toggle: false
+                });
+                bsCollapse.hide();
+            }
+        });
+    });
+});
+</script>
+
+</body>
+</html>
